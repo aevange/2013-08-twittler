@@ -14,8 +14,21 @@
         var newTweet = function (val) {
           var tweet = streams.home[val];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + ' created: ' + getTime(tweet.created_at));
           $tweet.insertAfter($button);
+        };
+
+        var getTime = function(val) {
+          var hours = val.getHours();
+          var amPM = hours < 12 ? "AM":"PM";
+          if (amPM === "PM"){hours -= 12;}
+          else if (hours == 0) {hours = 12;}
+          return hours + ":" + addZero(val.getMinutes()) + ":" + addZero(val.getSeconds()) + " " + amPM;
+        };
+
+        var addZero = function (val) {
+          val =  val < 10? '0' + val: val;
+          return val;
         };
        
         var out = 0;
