@@ -9,13 +9,13 @@
     <button>Get New Twittles</button>
       <script>
       $(document).ready(function(){
-        var $body = $('body');
+        var $button = $('button');
          
         var newTweet = function (val) {
           var tweet = streams.home[val];
           var $tweet = $('<div></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          $tweet.insertAfter($button);
         };
        
         var out = 0;
