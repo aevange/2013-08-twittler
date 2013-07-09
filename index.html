@@ -13,6 +13,14 @@
         color: #555555;
         background-color: lightgrey;
       }
+      .users {
+        text-align: center;
+      }
+      li {
+        display: inline;
+        margin: 10px;
+        color: red;
+      }
     </style>
   </head>
 
@@ -64,6 +72,7 @@
           <!-- remove one elemen for each added -->
           <!--use .remove() somehow -->
           newTweet(out);
+          $('div').last().remove();
           out++;
           }
         });
