@@ -3,6 +3,17 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <style media="screen" type="text/css">
+      body {
+        font-family: "Trebuchet MS";
+        color: #333333;
+        background-color: silver;
+      }
+      div:nth-child(odd) {
+        color: #555555;
+        background-color: lightgrey;
+      }
+    </style>
   </head>
   <body>
     
@@ -21,7 +32,7 @@
         var getTime = function(val) {
           var hours = val.getHours();
           var amPM = hours < 12 ? "AM":"PM";
-          if (amPM === "PM"){hours -= 12;}
+          if (hours > 12){hours -= 12;}
           else if (hours == 0) {hours = 12;}
           return hours + ":" + addZero(val.getMinutes()) + ":" + addZero(val.getSeconds()) + " " + amPM;
         };
