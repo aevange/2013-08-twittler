@@ -38,9 +38,10 @@
       <script>
       $(document).ready(function(){
         var $button = $('button');
+        var main = streams.home;
          
-        var newTweet = function (val) {
-          var tweet = streams.home[val];
+        var newTweet = function (val, source) {
+          var tweet = source[val];
           var $tweet = $('<div class="twittle"></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message + ' created: ' + getTime(tweet.created_at));
           $tweet.insertAfter($button);
@@ -62,7 +63,7 @@
         var out = 0;
         var index = streams.home.length - 1;
         while(index >= 0){
-          newTweet(index);
+          newTweet(index, main);
           index -= 1;
           out++;
         }
@@ -70,7 +71,7 @@
         $("button").click(function(){
           $('.display').remove();
           while(out < streams.home.length) {
-            newTweet(out);
+            newTweet(out, main);
             $('.twittle').last().remove();
             out++;
           }
@@ -89,10 +90,7 @@
             length++;
           }
           while (max > 0 && length >0) {
-            var userTweet=userObj[length-1];
-            var $userTweet=$('<div class="twittle"></div>');
-            $userTweet.text(userTweet.message + ' created: ' + getTime(userTweet.created_at));
-            $userTweet.insertAfter($button);
+            newTweet(length-1, userObj);
             max--;
             length--;
           }
