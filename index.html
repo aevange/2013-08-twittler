@@ -59,22 +59,19 @@
           val =  val < 10? '0' + val: val;
           return val;
         };
-       
-        var out = 0;
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          newTweet(index, main);
-          index -= 1;
-          out++;
-        }
-         
-        $("button").click(function(){
-          $('.display').remove();
-          while(out < streams.home.length) {
-            newTweet(out, main);
-            $('.twittle').last().remove();
-            out++;
+
+        var tweets = function(index, source){
+          var max = index < 10 ? index:10;
+          for(var i = max; i > 0; i--) {
+            newTweet(index - i, source);
           }
+        };
+
+        tweets(10, main);
+       
+        $("button").click(function(){
+          $('.twittle,.display').remove();
+          tweets(streams.home.length, main);
         });
 
         $('li').click(function(){
@@ -85,15 +82,11 @@
           $userDisplay.insertBefore($button);
 
           var userObj = streams.users[user];
-          var max = 10, length =0;
+          var length =0;
           for (var prop in userObj) {
             length++;
           }
-          while (max > 0 && length >0) {
-            newTweet(length-1, userObj);
-            max--;
-            length--;
-          }
+          tweets(length, userObj);
         });
       });
       </script>
