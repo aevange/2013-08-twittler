@@ -28,10 +28,10 @@
     <div class="users">
       <h3>Click a username below to view thier timeline</h3>
       <ul>
-        <li data-user="shawndrost">shawndrost</li>
-        <li data-user="sharksforcheap">sharksforcheap</li>
-        <li data-user="mracus">mracus</li>
-        <li data-user="douglascalhoun">douglascalhoun</li>
+        <li data-user="shawndrost">@shawndrost</li>
+        <li data-user="sharksforcheap">@sharksforcheap</li>
+        <li data-user="mracus">@mracus</li>
+        <li data-user="douglascalhoun">@douglascalhoun</li>
       </ul>
     </div>
     <button>Get New Twittles</button>
@@ -68,6 +68,7 @@
         }
          
         $("button").click(function(){
+          $('.display').remove();
           while(out < streams.home.length) {
             newTweet(out);
             $('.twittle').last().remove();
@@ -76,8 +77,12 @@
         });
 
         $('li').click(function(){
-          $('.twittle').remove();
+          $('.twittle, .display').remove();
           var user=$(this).data('user');
+          var $userDisplay = $("<h3 class='display'></h3>");
+          $userDisplay.text('Displaying latest twittles from @' + user);
+          $userDisplay.insertBefore($button);
+
           var userObj = streams.users[user];
           var max = 10, length =0;
           for (var prop in userObj) {
