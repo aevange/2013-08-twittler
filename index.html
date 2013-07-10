@@ -67,11 +67,29 @@
           out++;
         }
          
-      $("button").click(function(){
+        $("button").click(function(){
           while(out < streams.home.length) {
             newTweet(out);
             $('.twittle').last().remove();
             out++;
+          }
+        });
+
+        $('li').click(function(){
+          $('.twittle').remove();
+          var user=$(this).data('user');
+          var userObj = streams.users[user];
+          var max = 10, length =0;
+          for (var prop in userObj) {
+            length++;
+          }
+          while (max > 0 && length >0) {
+            var userTweet=userObj[length-1];
+            var $userTweet=$('<div class="twittle"></div>');
+            $userTweet.text(userTweet.message + ' created: ' + getTime(userTweet.created_at));
+            $userTweet.insertAfter($button);
+            max--;
+            length--;
           }
         });
       });
