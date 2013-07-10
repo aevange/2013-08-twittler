@@ -28,10 +28,10 @@
     <div class="users">
       <h3>Click a username below to view thier timeline</h3>
       <ul>
-        <li>shawndrost</li>
-        <li>sharksforcheap</li>
-        <li>mracus</li>
-        <li>douglascalhoun</li>
+        <li data-user="shawndrost">shawndrost</li>
+        <li data-user="sharksforcheap">sharksforcheap</li>
+        <li data-user="mracus">mracus</li>
+        <li data-user="douglascalhoun">douglascalhoun</li>
       </ul>
     </div>
     <button>Get New Twittles</button>
@@ -41,7 +41,7 @@
          
         var newTweet = function (val) {
           var tweet = streams.home[val];
-          var $tweet = $('<div></div>');
+          var $tweet = $('<div class="twittle"></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message + ' created: ' + getTime(tweet.created_at));
           $tweet.insertAfter($button);
         };
@@ -69,11 +69,9 @@
          
       $("button").click(function(){
           while(out < streams.home.length) {
-          <!-- remove one elemen for each added -->
-          <!--use .remove() somehow -->
-          newTweet(out);
-          $('div').last().remove();
-          out++;
+            newTweet(out);
+            $('.twittle').last().remove();
+            out++;
           }
         });
       });
